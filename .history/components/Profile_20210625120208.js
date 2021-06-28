@@ -23,9 +23,9 @@ export default function InputChoose() {
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
+      setInput1  ('')
+      setInput2 ('')
+      setInput3  ('')
     });
    
   };

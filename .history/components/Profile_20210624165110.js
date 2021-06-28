@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import axios from 'axios';
 import {styles} from '../styles/styles'
 
 export default function InputChoose() {
-  
+
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
   const [input3, setInput3] = useState('')
@@ -18,27 +18,26 @@ export default function InputChoose() {
     })
     .then(function (response) {
       // console.log(response);
-      
+      input1 = '';
+      input2 = '';
+      input3 = '';
 
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
     });
    
   };
-//  function Getrdv(){
-//     var url = '';
-//     axios.get(url)
-//     .then((ambilData) => {
-//       console.log(ambilData.data);
-//       this.setState({
-//         dataku: ambilData.data,
-//       }) 
-//     })
-//   };
+  Getrdv(){
+    var url = '';
+    axios.get(url)
+    .then((ambilData) => {
+      console.log(ambilData.data);
+      this.setState({
+        dataku: ambilData.data,
+      }) 
+    })
+  };
   const [ticketList, setTicketList] = useState([]);
   useEffect(() => {
     axios.get("http://172.16.8.181:8080/getrdv").then((response) => {
@@ -78,14 +77,12 @@ export default function InputChoose() {
             />
             <Button title='submit'
               color="grey"
-              onPress={() => { addrdv() }}
-              
-              
+              onPress={ () => { addrdv() }}
               />
 
            </View>
 
-           {/* <tbody>
+           <tbody>
           {ticketList.map((value, index) => {
             return (
               <tr key={value.index}>
@@ -95,13 +92,24 @@ export default function InputChoose() {
                 <td>{value.description}</td>
                 <td>{value.etat}</td>
                 <td>{value.date}</td>
-                
+                <td>
+                  <button onClick={updateTicket} className="badge bg-info">
+                    <a href={`/updatticket/${value._id}`}>Edit</a>
+                  </button>
+                </td>
 
-               
+                <td>
+                  <button
+                    className="badge bg-danger"
+                    onClick={() => deleteTicket(value._id)}
+                  >
+                    <a>Delete</a>
+                  </button>
+                </td>
               </tr>
             );
           })}
-        </tbody> */}
+        </tbody>
      </View>
   );
 }

@@ -4,6 +4,9 @@ import axios from 'axios';
 import {styles} from '../styles/styles'
 
 export default function InputChoose() {
+
+   this.myTextInput = React.createRef();
+
   
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
@@ -23,9 +26,9 @@ export default function InputChoose() {
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
+      setInput1  ('')
+      setInput2 ('')
+      setInput3  ('')
     });
    
   };

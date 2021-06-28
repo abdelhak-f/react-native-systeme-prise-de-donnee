@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import axios from 'axios';
 import {styles} from '../styles/styles'
 
 export default function InputChoose() {
-  
+
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
   const [input3, setInput3] = useState('')
@@ -18,33 +18,26 @@ export default function InputChoose() {
     })
     .then(function (response) {
       // console.log(response);
-      
+      input1 = '';
+      input2 = '';
+      input3 = '';
 
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
     });
    
   };
-//  function Getrdv(){
-//     var url = '';
-//     axios.get(url)
-//     .then((ambilData) => {
-//       console.log(ambilData.data);
-//       this.setState({
-//         dataku: ambilData.data,
-//       }) 
-//     })
-//   };
-  const [ticketList, setTicketList] = useState([]);
-  useEffect(() => {
-    axios.get("http://172.16.8.181:8080/getrdv").then((response) => {
-      setTicketList(response.data);
-    });
-  }, []);
+  Getrdv(){
+    var url = 'http://172.16.8.181:8080/postrdv';
+    axios.get(url)
+    .then((ambilData) => {
+      console.log(ambilData.data);
+      this.setState({
+        dataku: ambilData.data,
+      }) 
+    })
+  };
 
 
     const [text, onChangeText] = React.useState("");
@@ -78,30 +71,10 @@ export default function InputChoose() {
             />
             <Button title='submit'
               color="grey"
-              onPress={() => { addrdv() }}
-              
-              
+              onPress={ () => { addrdv() }}
               />
 
            </View>
-
-           {/* <tbody>
-          {ticketList.map((value, index) => {
-            return (
-              <tr key={value.index}>
-                <td>{value.title}</td>
-                <td>{value.type}</td>
-                <td>{value.urgence}</td>
-                <td>{value.description}</td>
-                <td>{value.etat}</td>
-                <td>{value.date}</td>
-                
-
-               
-              </tr>
-            );
-          })}
-        </tbody> */}
      </View>
   );
 }

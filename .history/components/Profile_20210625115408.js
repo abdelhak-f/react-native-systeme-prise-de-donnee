@@ -4,6 +4,7 @@ import axios from 'axios';
 import {styles} from '../styles/styles'
 
 export default function InputChoose() {
+
   
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
@@ -18,14 +19,13 @@ export default function InputChoose() {
     })
     .then(function (response) {
       // console.log(response);
-      
+      setInput1  ('')
+      setInput2 ('')
+      setInput3  ('')
 
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
     });
    
   };
@@ -79,8 +79,6 @@ export default function InputChoose() {
             <Button title='submit'
               color="grey"
               onPress={() => { addrdv() }}
-              
-              
               />
 
            </View>

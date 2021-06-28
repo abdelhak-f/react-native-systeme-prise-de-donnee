@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Text, View, TextInput, Button } from 'react-native';
 import axios from 'axios';
 import {styles} from '../styles/styles'
 
 export default function InputChoose() {
-  
+
   const [input1, setInput1] = useState('')
   const [input2, setInput2] = useState('')
   const [input3, setInput3] = useState('')
@@ -17,35 +17,15 @@ export default function InputChoose() {
       date_rdv: input3
     })
     .then(function (response) {
-      // console.log(response);
-      
-
+      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
-      setInput1('');
-      setInput2('');
-      setInput3('');
     });
-   
+    input1 = '';
+    input2 = '';
+    input3 = '';
   };
-//  function Getrdv(){
-//     var url = '';
-//     axios.get(url)
-//     .then((ambilData) => {
-//       console.log(ambilData.data);
-//       this.setState({
-//         dataku: ambilData.data,
-//       }) 
-//     })
-//   };
-  const [ticketList, setTicketList] = useState([]);
-  useEffect(() => {
-    axios.get("http://172.16.8.181:8080/getrdv").then((response) => {
-      setTicketList(response.data);
-    });
-  }, []);
-
 
     const [text, onChangeText] = React.useState("");
     const [date, onChangeNumber] = React.useState(null);
@@ -72,36 +52,16 @@ export default function InputChoose() {
             />
              <TextInput
               style={styles.childinput}
-              onChangeText={(val) => setInput3(val)}
+              onChangeText={(input3) => setInput3(val)}
               placeholder="date_rdv"
               keyboardType="numeric"
             />
             <Button title='submit'
               color="grey"
-              onPress={() => { addrdv() }}
-              
-              
+              onPress={ () => { addrdv() }}
               />
 
            </View>
-
-           {/* <tbody>
-          {ticketList.map((value, index) => {
-            return (
-              <tr key={value.index}>
-                <td>{value.title}</td>
-                <td>{value.type}</td>
-                <td>{value.urgence}</td>
-                <td>{value.description}</td>
-                <td>{value.etat}</td>
-                <td>{value.date}</td>
-                
-
-               
-              </tr>
-            );
-          })}
-        </tbody> */}
      </View>
   );
 }
