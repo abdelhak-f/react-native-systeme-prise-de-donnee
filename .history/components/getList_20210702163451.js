@@ -1,0 +1,100 @@
+import React, { useState, useEffect} from 'react';
+import { Text, View, FlatList, StyleSheet } from 'react-native';
+import axios from 'axios';
+
+export default function getList() {
+
+  const [render, setRenderItem] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://172.16.8.181:8080/getRdv')
+    .then(async function (response) {
+      setRenderItem(response.data);
+  })
+  .catch(function (error) {
+      console.log(error)
+  })
+  }, []);
+
+  
+  return (
+    <View  >
+    <Text style={style.title} >
+      Les Rendez-vous :
+    </Text>
+   
+    <View styles={style.container}>
+         <FlatList
+          data={render}
+          keyExtractor={(item ) => item.id}
+          renderItem={({item}) =>  (
+            <View>
+              <Text style={style.h2text}>{item.num_rdv} {item.heure_rdv} {item.date_rdv}  </Text>
+              {/* <Text style={style.h2text}>{item.heure_rdv}</Text>
+              <Text style={style.h2text}>{item.date_rdv}</Text> */}
+            </View>
+          
+            )}
+            
+        />
+      </View>
+   </View>
+   )
+   }  
+
+    const styles = StyleSheet.create({
+    container: {
+      // flex: 1,
+      // marginTop: 50,
+      // justifyContent: 'space-between',
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      flex: 1,
+      padding: 24,
+      backgroundColor: "#eaeaea"
+      
+    },
+    h2text: {
+      // flex:1,
+      // flexDirection:'row',
+      // marginTop: 10,
+      // fontFamily: 'Helvetica',
+      // fontSize: 26,
+      // fontWeight: 'bold',
+      // backgroundColor: 'red',
+      // justifyContent: 'center',
+      marginTop: 16,
+      paddingVertical: 8,
+      borderWidth: 4,
+      borderColor: "#20232a",
+      borderRadius: 6,
+      backgroundColor: "#61dafb",
+      color: "#20232a",
+      textAlign: "center",
+      fontSize: 30,
+      fontWeight: "bold"
+      
+    },
+    flatview: {
+      justifyContent: 'center',
+      paddingTop: 30,
+      borderRadius: 2,
+    },
+    title: {
+      justifyContent: 'center',
+      paddingTop: 10,
+      paddingBottom:10,
+      fontFamily: 'Verdana',
+      fontSize: 18
+    },
+    email: {
+      color: 'red'
+    }
+    
+  });
+ 
+
+
+
+
+
